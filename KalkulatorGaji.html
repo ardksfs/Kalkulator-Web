@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator Gaji| ALGORITMA DAN PEMROGRAMAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .result {
+            background: #e5f9e7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kalkulator Gaji Karyawan</h2>
+        <label for="golongan">Pilih Golongan:</label>
+        <select id="golongan">
+            <option value="A">Golongan A</option>
+            <option value="B">Golongan B</option>
+            <option value="C">Golongan C</option>
+        </select>
+
+        <label for="jam">Jam Lembur:</label>
+        <input type="number" id="jam" min="0" placeholder="Masukkan jumlah jam lembur">
+
+        <button onclick="hitungGaji()">Hitung Gaji </button>
+
+        <div class="result" id="output" style="display: none;"></div>
+    </div>
+
+    <script>
+        function hitungGaji() {
+            const golongan = document.getElementById("golongan").value;
+            const jam = parseInt(document.getElementById("jam").value);
+
+            const gajiPokokMap = {
+                A: 5000000,
+                B: 6500000,
+                C: 9500000
+            };
+
+            let persentase = 0;
+            if (jam === 1) persentase = 0.30;
+            else if (jam === 2) persentase = 0.32;
+            else if (jam === 3) persentase = 0.34;
+            else if (jam === 4) persentase = 0.36;
+            else if (jam >= 5) persentase = 0.38;
+
+            const gajiPokok = gajiPokokMap[golongan];
+            const gajiLembur = gajiPokok * persentase;
+            const total = gajiPokok + gajiLembur;
+
+            document.getElementById("output").style.display = "block";
+            document.getElementById("output").innerHTML = `
+                Golongan: ${golongan} <br>
+                Gaji Pokok: Rp. ${gajiPokok.toLocaleString()} <br>
+                Jam Lembur: ${jam} jam <br>
+                Gaji Lembur: Rp. ${gajiLembur.toLocaleString()} <br>
+                <hr>
+                <strong>Total Gaji: Rp. ${total.toLocaleString()}</strong>
+            `;
+        }
+    </script>
+</body>
+</html>
+
+<!-- Fregi Ardika Setyawan | 050466298 | Sistem Informasi | Semarang  -->
